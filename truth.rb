@@ -25,6 +25,15 @@ get '/display' do
     params[:size] = '3'
   end
 
+  # CHECK VALIDITY OF ARGS
+  # A single-character true symbol
+  # A single-character false symbol
+  # A size greater than or equal to 2
+  # Different characters for the true and false symbols
+  if params[:true] == params[:false] or params[:true].length > 1 or params[:false].length > 1 or params[:size].to_i < 2
+    return erb :invalid
+  end
+
   table = Array.new
   n = params[:size].to_i
 
